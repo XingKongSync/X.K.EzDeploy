@@ -1,0 +1,7 @@
+﻿{
+	"ServiceName": "DemoService",
+	"ExcutableFilePath": "DemoService.exe",
+	"Args": "",
+	"DisplayName": "测试服务",
+	"Description": "这个服务会启动一个HTTP服务器，若访问 http://127.0.0.1:8123 成功，则说明服务成功启动"
+}

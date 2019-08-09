@@ -1,0 +1,7 @@
+﻿{
+	"ServiceName": "WatchDogService",
+	"ExcutableFilePath": "WatchDogService.exe",
+	"Args": "",
+	"DisplayName": "看门狗服务",
+	"Description": "这个服务负责对经由 EasyDeploy 部署的服务进行守护，负责维护服务状态与实际状态的一致性。\r\n注意：当安装新服务或者卸载了服务时，WatchDogService必须重新安装，否则无法正常守护其他服务"
+}
