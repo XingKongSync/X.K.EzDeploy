@@ -25,7 +25,7 @@ ServiceConfig.json 的格式如下
 }
 ```
 
-若您有多个服务，可以重复上述步骤，然后将整个 EasyDeploy 程序文件夹保持结构，发送给运维人员
+若您有多个服务，可以重复上述步骤，然后将整个 EasyDeploy 程序文件夹保持结构完整，发送给运维人员
 
 需要注意的是，建议您在其他服务都安装完成后，再安装 WatchDogService，否则 WatchDogService 无法察觉您所做的更改。
 若您先安装了 WatchDogService，您也可以随时卸载 WatchDogService，当您再次安装 WatchDogService时，WatchDogService会自动应用当前已安装服务的变更。
