@@ -53,6 +53,12 @@ namespace Xked.ServiceHelper
                 throw new FileNotFoundException($"找不到可执行文件的路径\r\n{exePath}");
             }
 
+            Uri uri = new Uri(exePath);
+            if (!uri.IsAbsoluteUri)
+            {
+                throw new ArgumentException("必须指定应用程序的完整路径");
+            }
+
             Process instsrvProc = new Process();
             instsrvProc.StartInfo = new ProcessStartInfo()
             {
