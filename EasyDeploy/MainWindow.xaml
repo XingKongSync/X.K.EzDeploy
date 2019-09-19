@@ -52,7 +52,7 @@
                 </ScrollViewer>
             </Grid>
         </TabItem>
-        <TabItem Header="客户端部署">
+        <TabItem Header="客户端部署" Visibility="Collapsed">
             
         </TabItem>
     </TabControl>

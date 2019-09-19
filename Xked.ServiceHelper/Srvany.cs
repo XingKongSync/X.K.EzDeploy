@@ -132,6 +132,23 @@ namespace Xked.ServiceHelper
             return service?.Status == ServiceControllerStatus.Running;
         }
 
+        public static bool IsProcessExists(string fullExePath)
+        {
+            string exeFileName = Path.GetFileNameWithoutExtension(fullExePath);
+            var procs = Process.GetProcessesByName(exeFileName);
+            if (procs != null)
+            {
+                foreach (var proc in procs)
+                {
+                    if (proc.MainModule.FileName.Equals(fullExePath))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
         /// <summary>
         /// 将服务要启动的实际exe路径写入注册表
         /// </summary>

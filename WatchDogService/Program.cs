@@ -33,7 +33,7 @@ namespace WatchDogService
                             //因为有可能服务显示“正在运行”但是进程列表里没有那个进程
                             if (IsServiceRunning(srvInfo.ServiceName))
                             {
-                                if (!IsProcessExists(srvInfo.FullExePath))
+                                if (!Srvany.IsProcessExists(srvInfo.FullExePath))
                                 {
                                     Srvany.StopService(srvInfo.ServiceName);
                                 }
@@ -71,23 +71,6 @@ namespace WatchDogService
         static bool IsServiceRunning(string srvName)
         {
             return Srvany.IsServiceRunning(srvName);
-        }
-
-        static bool IsProcessExists(string fullExePath)
-        {
-            string exeFileName = Path.GetFileNameWithoutExtension(fullExePath);
-            var procs = Process.GetProcessesByName(exeFileName);
-            if (procs != null)
-            {
-                foreach (var proc in procs)
-                {
-                    if (proc.MainModule.FileName.Equals(fullExePath))
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
         }
     }
 }

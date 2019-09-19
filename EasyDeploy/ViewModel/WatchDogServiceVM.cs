@@ -2,11 +2,13 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WatchDogService.Config;
+using Xked.ServiceHelper;
 
 namespace EasyDeploy.ViewModel
 {
@@ -17,6 +19,18 @@ namespace EasyDeploy.ViewModel
         private List<ServiceVM> _serviceList = null;
 
         private ServiceBaseInfo selfInfo = null;
+
+        public override void UpdateStatus()
+        {
+            if (Srvany.IsServiceRunning(WATCHDOG_SERVICE_NAME))
+            {
+                if (!Srvany.IsProcessExists(ServiceInfo.Config?.ExcutableFilePath))
+                {
+                    Srvany.StopService(WATCHDOG_SERVICE_NAME);
+                }
+            }
+            base.UpdateStatus();
+        }
 
         public void SetServiceVMList(IEnumerable<ServiceVM> serviceVMList)
         {

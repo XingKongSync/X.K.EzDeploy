@@ -158,7 +158,7 @@ namespace EasyDeploy.ViewModel
         /// 更新服务状态
         /// </summary>
         /// <param name="serviceInfo"></param>
-        public void UpdateStatus()
+        public virtual void UpdateStatus()
         {
             if (ServiceInfo != null && ServiceInfo.Config != null)
             {
