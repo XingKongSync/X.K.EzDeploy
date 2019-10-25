@@ -19,14 +19,18 @@ namespace EasyDeploy.ViewModel
         private List<ServiceVM> _serviceList = null;
 
         private ServiceBaseInfo selfInfo = null;
+        private string selfFullExcutableFilePath = null;
 
         public override void UpdateStatus()
         {
-            if (Srvany.IsServiceRunning(WATCHDOG_SERVICE_NAME))
+            if (!string.IsNullOrWhiteSpace(selfFullExcutableFilePath))
             {
-                if (!Srvany.IsProcessExists(ServiceInfo.Config?.ExcutableFilePath))
+                if (Srvany.IsServiceRunning(WATCHDOG_SERVICE_NAME))
                 {
-                    Srvany.StopService(WATCHDOG_SERVICE_NAME);
+                    if (!Srvany.IsProcessExists(selfFullExcutableFilePath))
+                    {
+                        Srvany.StopService(WATCHDOG_SERVICE_NAME);
+                    }
                 }
             }
             base.UpdateStatus();
@@ -44,6 +48,16 @@ namespace EasyDeploy.ViewModel
                         if (WATCHDOG_SERVICE_NAME.Equals(srvVM.ServiceInfo.Config?.ServiceName))
                         {
                             selfInfo = srvVM.ServiceInfo;
+
+                            string serviceBaseDir = selfInfo?.BaseDirectory;
+                            if (!string.IsNullOrEmpty(serviceBaseDir))
+                            {
+                                string watchDogExeFullPath = Path.Combine(serviceBaseDir, selfInfo?.Config?.ExcutableFilePath);
+                                if (File.Exists(watchDogExeFullPath))
+                                {
+                                    selfFullExcutableFilePath = watchDogExeFullPath;
+                                }
+                            }
                         }
                         else
                         {
